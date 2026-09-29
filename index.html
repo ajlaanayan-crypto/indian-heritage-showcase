@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indian Heritage - Welcome</title>
+    <meta name="description" content="Cinematic Indian Heritage intro featuring a horizontal split transition and custom premium interactive country/language greeting.">
+    <!-- Google Fonts: Outfit (Sans), Playfair Display (Serif), Noto Sans Devanagari (Hindi), Montserrat, and Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Noto+Sans+Devanagari:wght@400;700;900&family=Montserrat:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Main Container -->
+    <main id="experience-container" class="saffron-mist-theme">
+        
+        <!-- Floating Transition Logo -->
+        <div id="transition-logo-container" class="transition-logo-container hidden-logo">
+            <img src="logo.png" alt="Transition Logo" id="transition-logo">
+        </div>
+        
+        <!-- Off-White Cinematic Overlay Screen -->
+        <div id="cinematic-overlay" class="cinematic-overlay hidden"></div>
+        
+        <!-- Subtle Autoplay Audio Prompt (shown only if browser blocks audio autoplay) -->
+        <div id="audio-prompt" class="audio-prompt hidden">
+            <span class="prompt-text">Tap anywhere for sound</span>
+            <span class="prompt-icon">🔊</span>
+        </div>
+
+        <!-- Floating Audio Control Button -->
+        <button id="audio-control-btn" class="audio-control-btn glass-panel" title="Mute/Unmute Sound">
+            <span id="audio-control-icon">🔇</span>
+        </button>
+
+        <!-- Video Player (Visible immediately on load) -->
+        <section id="video-wrapper" class="video-container">
+            <!-- Skip Intro Button -->
+            <button id="skip-intro-btn" class="skip-btn">Skip Intro ➔</button>
+            
+            <!-- Single Video (Plays for 15 seconds, then splits) -->
+            <video id="intro-video" class="heritage-video active" preload="auto" playsinline autoplay muted loop>
+                <source src="From Klickpin.com- Get inspired by Unique boho home decor for your next inspiration board with simple details that elevate the final look-pin-id-1 - ROTATE - Videobolt.net.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </section>
+
+        <!-- Horizontal Split Layer (Revealed at 15s when video freezes) -->
+        <div id="split-stage" class="split-stage hidden">
+            <canvas id="split-top" class="split-half"></canvas>
+            <canvas id="split-bottom" class="split-half"></canvas>
+            <div class="split-line"></div>
+        </div>
+
+        <!-- Final Greeting Presentation & Digital Portal -->
+        <section id="greeting-view" class="overlay-view hidden">
+            <!-- Translucent background watermark -->
+            <div class="watermark-text">अतिथि देवो भव</div>
+
+            <!-- Top Navigation Bar -->
+            <nav class="top-nav glass-panel animate-item">
+                <div class="nav-container">
+                    <div class="nav-brand">
+                        <img src="logo.png" alt="Mini Logo" class="nav-logo">
+                        <span class="nav-title">India e-Visa</span>
+                    </div>
+                    <div class="nav-links">
+                        <a href="#" class="nav-link active" data-target="home-view">Home</a>
+                        <a href="#" class="nav-link" data-target="places-view">Places to Visit</a>
+                        <a href="#" class="nav-link" data-target="events-view">Events</a>
+                        <a href="#" class="nav-link" data-target="about-view">About Us</a>
+                        <a href="#" class="nav-link" data-target="faq-view">FAQ</a>
+                    </div>
+                    <div class="nav-actions">
+                        <span class="motto-badge">"अतिथि देवो भव"</span>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Main Content Area -->
+            <div class="main-canvas">
+                
+                <!-- Home View -->
+                <div id="home-view" class="portal-view active-view fade-in">
+                    <!-- Hero Section containing details & selectors -->
+                    <section class="hero-split">
+                        <!-- Hero Info Column -->
+                        <div class="hero-info animate-item">
+                            <h1 class="hero-title">India's e-Visa Portal</h1>
+                            <p class="hero-subtitle">"India visit is not just a journey, it's a lifetime memory"</p>
+                            <p class="hero-description">
+                                Secure your official travel authorization through the simplified digital gateway. Experience the heritage, spirituality, and vibrancy of India with ease.
+                            </p>
+                            
+                            <div class="hero-buttons">
+                                <!-- Glowing Saffron Primary Action -->
+                                <button id="apply-visa-btn" class="btn btn-primary glowing-primary">
+                                    Apply for e-Visa
+                                    <span class="btn-icon">➔</span>
+                                </button>
+                                <!-- Secondary Action -->
+                                <button id="enquire-visa-btn" class="btn btn-secondary glass-panel">
+                                    Enquire Application
+                                    <span class="btn-icon">🔍</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Interactive Selectors Column -->
+                        <div class="hero-interactive animate-item">
+                            <!-- Form Card: Custom Country & Language Selectors -->
+                            <div id="selection-card" class="selection-card glass-panel">
+                                <h3 class="card-title">Welcome Greetings</h3>
+                                <p class="card-subtitle">Select your home country and preferred language to receive a traditional welcome.</p>
+                                
+                                <div class="selectors-row">
+                                    <!-- Custom Country Selector -->
+                                    <div class="input-group">
+                                        <span class="form-label">Choose your Country</span>
+                                        <div class="custom-select" id="country-custom-select">
+                                            <div class="custom-select-trigger" id="country-trigger">
+                                                <span class="trigger-text">Select Country</span>
+                                                <span class="custom-arrow"></span>
+                                            </div>
+                                            <div class="custom-options" id="country-options">
+                                                <span class="custom-option" data-value="IN">India</span>
+                                                <span class="custom-option" data-value="US">United States</span>
+                                                <span class="custom-option" data-value="GB">United Kingdom</span>
+                                                <span class="custom-option" data-value="FR">France</span>
+                                                <span class="custom-option" data-value="DE">Germany</span>
+                                                <span class="custom-option" data-value="ES">Spain</span>
+                                                <span class="custom-option" data-value="JP">Japan</span>
+                                                <span class="custom-option" data-value="IT">Italy</span>
+                                                <span class="custom-option" data-value="RU">Russia</span>
+                                                <span class="custom-option" data-value="SA">Saudi Arabia</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Custom Language Selector -->
+                                    <div class="input-group">
+                                        <span class="form-label">Choose your Language</span>
+                                        <div class="custom-select disabled" id="language-custom-select">
+                                            <div class="custom-select-trigger" id="language-trigger">
+                                                <span class="trigger-text">Select country first</span>
+                                                <span class="custom-arrow"></span>
+                                            </div>
+                                            <div class="custom-options" id="language-options">
+                                                <!-- Populated dynamically via JS -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Dynamic Translation Output Container -->
+                                <div id="translation-box" class="translation-box hidden">
+                                    <div id="translation-output" class="translation-output"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Places View -->
+                <div id="places-view" class="portal-view">
+                    <div class="view-header text-center animate-item">
+                        <h2 class="section-heading">Destinations to Explore</h2>
+                        <p class="section-subheading">Embark on an unforgettable journey through India's iconic cultural landscapes.</p>
+                    </div>
+                    <div class="places-grid">
+                        <!-- Rank 1: Valley of Flowers National Park -->
+                        <div class="place-card glass-panel animate-item">
+                            <div class="place-header-bar">
+                                <span class="place-icon-emoji">🌸</span>
+                                <span class="place-rank-tag">#1</span>
+                            </div>
+                            <h3 class="place-title">Valley of Flowers</h3>
+                            <p class="place-description"><strong>Why it's great in July:</strong> Peak blooming season. One of the most beautiful times to visit with alpine flowers in full color.</p>
+                            <a href="https://www.google.com/search?q=Valley+of+Flowers+National+Park+Tourism" target="_blank" rel="noopener noreferrer" class="btn btn-secondary glass-panel">Explore Park</a>
+                        </div>
+
+                        <!-- Rank 2: Leh -->
+                        <div class="place-card glass-panel animate-item">
+                            <div class="place-header-bar">
+                                <span class="place-icon-emoji">🏔️</span>
+                                <span class="place-rank-tag">#2</span>
+                            </div>
+                            <h3 class="place-title">Leh Ladakh</h3>
+                            <p class="place-description"><strong>Why it's great in July:</strong> Dry weather, stunning mountain roads, Pangong Lake, and Nubra Valley are fully accessible.</p>
+                            <a href="https://www.google.com/search?q=Leh+Ladakh+Tourism" target="_blank" rel="noopener noreferrer" class="btn btn-secondary glass-panel">Explore Leh</a>
+                        </div>
+
+                        <!-- Rank 3: Spiti Valley -->
+                        <div class="place-card glass-panel animate-item">
+                            <div class="place-header-bar">
+                                <span class="place-icon-emoji">🏜️</span>
+                                <span class="place-rank-tag">#3</span>
+                            </div>
+                            <h3 class="place-title">Spiti Valley</h3>
+                            <p class="place-description"><strong>Why it's great in July:</strong> High-altitude desert with minimal rainfall and spectacular, clear mountain scenery.</p>
+                            <a href="https://www.google.com/search?q=Spiti+Valley+Tourism" target="_blank" rel="noopener noreferrer" class="btn btn-secondary glass-panel">Explore Spiti</a>
+                        </div>
+
+                        <!-- Rank 4: Coorg -->
+                        <div class="place-card glass-panel animate-item">
+                            <div class="place-header-bar">
+                                <span class="place-icon-emoji">☕</span>
+                                <span class="place-rank-tag">#4</span>
+                            </div>
+                            <h3 class="place-title">Coorg</h3>
+                            <p class="place-description"><strong>Why it's great in July:</strong> Lush coffee plantations, roaring waterfalls, and cool monsoon weather make it a green paradise.</p>
+                            <a href="https://www.google.com/search?q=Coorg+Tourism" target="_blank" rel="noopener noreferrer" class="btn btn-secondary glass-panel">Explore Coorg</a>
+                        </div>
+
+                        <!-- Rank 5: Munnar -->
+                        <div class="place-card glass-panel animate-item">
+                            <div class="place-header-bar">
+                                <span class="place-icon-emoji">🍵</span>
+                                <span class="place-rank-tag">#5</span>
+                            </div>
+                            <h3 class="place-title">Munnar</h3>
+                            <p class="place-description"><strong>Why it's great in July:</strong> Misty tea gardens and green hills; expect regular rain but breathtakingly beautiful landscapes.</p>
+                            <a href="https://www.google.com/search?q=Munnar+Tourism" target="_blank" rel="noopener noreferrer" class="btn btn-secondary glass-panel">Explore Munnar</a>
+                        </div>
+
+                        <!-- Rank 6: Udaipur -->
+                        <div class="place-card glass-panel animate-item">
+                            <div class="place-header-bar">
+                                <span class="place-icon-emoji">🏰</span>
+                                <span class="place-rank-tag">#6</span>
+                            </div>
+                            <h3 class="place-title">Udaipur</h3>
+                            <p class="place-description"><strong>Why it's great in July:</strong> Pleasant monsoon climate with filled lakes, royal palaces, and fewer tourist crowds.</p>
+                            <a href="https://www.google.com/search?q=Udaipur+Tourism" target="_blank" rel="noopener noreferrer" class="btn btn-secondary glass-panel">Explore Udaipur</a>
+                        </div>
+
+                        <!-- Rank 7: Cherrapunji -->
+                        <div class="place-card glass-panel animate-item">
+                            <div class="place-header-bar">
+                                <span class="place-icon-emoji">🌧️</span>
+                                <span class="place-rank-tag">#7</span>
+                            </div>
+                            <h3 class="place-title">Cherrapunji</h3>
+                            <p class="place-description"><strong>Why it's great in July:</strong> Famous for dramatic, roaring waterfalls and living root bridges in full glory during the rainy season.</p>
+                            <a href="https://www.google.com/search?q=Cherrapunji+Tourism" target="_blank" rel="noopener noreferrer" class="btn btn-secondary glass-panel">Explore Cherrapunji</a>
+                        </div>
+
+                        <!-- Rank 8: Rishikesh -->
+                        <div class="place-card glass-panel animate-item">
+                            <div class="place-header-bar">
+                                <span class="place-icon-emoji">🧘</span>
+                                <span class="place-rank-tag">#8</span>
+                            </div>
+                            <h3 class="place-title">Rishikesh</h3>
+                            <p class="place-description"><strong>Why it's great in July:</strong> Spiritual yoga centers, cozy riverside cafés, and holy gangetic views. (Rafting may be limited).</p>
+                            <a href="https://www.google.com/search?q=Rishikesh+Tourism" target="_blank" rel="noopener noreferrer" class="btn btn-secondary glass-panel">Explore Rishikesh</a>
+                        </div>
+
+                        <!-- Rank 9: Mount Abu -->
+                        <div class="place-card glass-panel animate-item">
+                            <div class="place-header-bar">
+                                <span class="place-icon-emoji">⛰️</span>
+                                <span class="place-rank-tag">#9</span>
+                            </div>
+                            <h3 class="place-title">Mount Abu</h3>
+                            <p class="place-description"><strong>Why it's great in July:</strong> Rajasthan's only hill station, appearing extremely pleasant, misty, and green during the monsoon.</p>
+                            <a href="https://www.google.com/search?q=Mount+Abu+Tourism" target="_blank" rel="noopener noreferrer" class="btn btn-secondary glass-panel">Explore Mount Abu</a>
+                        </div>
+
+                        <!-- Rank 10: Lonavala -->
+                        <div class="place-card glass-panel animate-item">
+                            <div class="place-header-bar">
+                                <span class="place-icon-emoji">🌫️</span>
+                                <span class="place-rank-tag">#10</span>
+                            </div>
+                            <h3 class="place-title">Lonavala</h3>
+                            <p class="place-description"><strong>Why it's great in July:</strong> Roaring seasonal waterfalls, heavy mist, and lush green hills, a popular weekend getaway near Mumbai.</p>
+                            <a href="https://www.google.com/search?q=Lonavala+Tourism" target="_blank" rel="noopener noreferrer" class="btn btn-secondary glass-panel">Explore Lonavala</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Events View -->
+                <div id="events-view" class="portal-view">
+                    <div class="view-header text-center animate-item">
+                        <h2 class="section-heading">Cultural Calendar & Festivals</h2>
+                        <p class="section-subheading">Celebrate the heritage, colors, and spiritual traditions of seasonal festivals.</p>
+                    </div>
+                    <div class="events-grid">
+                        <!-- Event 1: Diwali -->
+                        <div class="event-card glass-panel animate-item">
+                            <div class="event-header-bar">
+                                <span class="event-icon-emoji">🪔</span>
+                                <div class="event-meta-info">
+                                    <span class="event-badge saffron-bg">Festival of Lights</span>
+                                    <span class="event-date">Nov 2026</span>
+                                </div>
+                            </div>
+                            <div class="event-content-body">
+                                <h3 class="event-title">Diwali</h3>
+                                <p class="event-description">Celebrating the triumph of light over darkness with clay lamps (diyas), fireworks, and family feasts.</p>
+                            </div>
+                        </div>
+
+                        <!-- Event 2: Holi -->
+                        <div class="event-card glass-panel animate-item">
+                            <div class="event-header-bar">
+                                <span class="event-icon-emoji">🎨</span>
+                                <div class="event-meta-info">
+                                    <span class="event-badge green-bg">Festival of Colors</span>
+                                    <span class="event-date">Mar 2026</span>
+                                </div>
+                            </div>
+                            <div class="event-content-body">
+                                <h3 class="event-title">Holi</h3>
+                                <p class="event-description">A joyful spring carnival where the streets erupt in organic colored powder, dance, and music.</p>
+                            </div>
+                        </div>
+
+                        <!-- Event 3: Maha Kumbh Mela -->
+                        <div class="event-card glass-panel animate-item">
+                            <div class="event-header-bar">
+                                <span class="event-icon-emoji">🕉️</span>
+                                <div class="event-meta-info">
+                                    <span class="event-badge blue-bg">Spiritual Gathering</span>
+                                    <span class="event-date">Jan-Feb 2026</span>
+                                </div>
+                            </div>
+                            <div class="event-content-body">
+                                <h3 class="event-title">Maha Kumbh Mela</h3>
+                                <p class="event-description">Participate in the largest peaceful human assembly on earth, bathing in the sacred river confluence.</p>
+                            </div>
+                        </div>
+
+                        <!-- Event 4: International Yoga Festival -->
+                        <div class="event-card glass-panel animate-item">
+                            <div class="event-header-bar">
+                                <span class="event-icon-emoji">🧘</span>
+                                <div class="event-meta-info">
+                                    <span class="event-badge orange-bg">Wellness Week</span>
+                                    <span class="event-date">Mar 2026</span>
+                                </div>
+                            </div>
+                            <div class="event-content-body">
+                                <h3 class="event-title">International Yoga Festival</h3>
+                                <p class="event-description">Join spiritual leaders and practitioners from all over the world in Rishikesh for yoga sessions.</p>
+                            </div>
+                        </div>
+
+                        <!-- Event 5: Dussehra -->
+                        <div class="event-card glass-panel animate-item">
+                            <div class="event-header-bar">
+                                <span class="event-icon-emoji">🏹</span>
+                                <div class="event-meta-info">
+                                    <span class="event-badge saffron-bg">Victory of Good</span>
+                                    <span class="event-date">Oct 2026</span>
+                                </div>
+                            </div>
+                            <div class="event-content-body">
+                                <h3 class="event-title">Dussehra</h3>
+                                <p class="event-description">Witness the spectacular burning of towering effigies of Ravana, symbolizing the victory of Lord Rama.</p>
+                            </div>
+                        </div>
+
+                        <!-- Event 6: Durga Puja -->
+                        <div class="event-card glass-panel animate-item">
+                            <div class="event-header-bar">
+                                <span class="event-icon-emoji">🌸</span>
+                                <div class="event-meta-info">
+                                    <span class="event-badge green-bg">Street Carnival</span>
+                                    <span class="event-date">Oct 2026</span>
+                                </div>
+                            </div>
+                            <div class="event-content-body">
+                                <h3 class="event-title">Durga Puja</h3>
+                                <p class="event-description">Immerse in Kolkata's vibrant carnival of colossal artistic pandals and grand idol processions.</p>
+                            </div>
+                        </div>
+
+                        <!-- Event 7: Pushkar Camel Fair -->
+                        <div class="event-card glass-panel animate-item">
+                            <div class="event-header-bar">
+                                <span class="event-icon-emoji">🐫</span>
+                                <div class="event-meta-info">
+                                    <span class="event-badge blue-bg">Desert Carnival</span>
+                                    <span class="event-date">Nov 2026</span>
+                                </div>
+                            </div>
+                            <div class="event-content-body">
+                                <h3 class="event-title">Pushkar Camel Fair</h3>
+                                <p class="event-description">Experience the historic camel and livestock fair in Rajasthan, featuring hot air balloons and dances.</p>
+                            </div>
+                        </div>
+
+                        <!-- Event 8: Hornbill Festival -->
+                        <div class="event-card glass-panel animate-item">
+                            <div class="event-header-bar">
+                                <span class="event-icon-emoji">🪶</span>
+                                <div class="event-meta-info">
+                                    <span class="event-badge orange-bg">Tribal Heritage</span>
+                                    <span class="event-date">Dec 2026</span>
+                                </div>
+                            </div>
+                            <div class="event-content-body">
+                                <h3 class="event-title">Hornbill Festival</h3>
+                                <p class="event-description">A grand celebration of Nagaland's indigenous tribal arts, music, traditional foods, and warrior dances.</p>
+                            </div>
+                        </div>
+
+                        <!-- Event 9: Taj Mahotsav -->
+                        <div class="event-card glass-panel animate-item">
+                            <div class="event-header-bar">
+                                <span class="event-icon-emoji">🏺</span>
+                                <div class="event-meta-info">
+                                    <span class="event-badge saffron-bg">Arts & Crafts</span>
+                                    <span class="event-date">Feb 2027</span>
+                                </div>
+                            </div>
+                            <div class="event-content-body">
+                                <h3 class="event-title">Taj Mahotsav</h3>
+                                <p class="event-description">A 10-day carnival in Agra showcasing India's finest artisans, classical music, and traditional cuisine.</p>
+                            </div>
+                        </div>
+
+                        <!-- Event 10: Onam -->
+                        <div class="event-card glass-panel animate-item">
+                            <div class="event-header-bar">
+                                <span class="event-icon-emoji">🌾</span>
+                                <div class="event-meta-info">
+                                    <span class="event-badge green-bg">Harvest Festival</span>
+                                    <span class="event-date">Aug-Sep 2026</span>
+                                </div>
+                            </div>
+                            <div class="event-content-body">
+                                <h3 class="event-title">Onam</h3>
+                                <p class="event-description">Kerala's grand harvest festival featuring traditional snake boat races, flower carpets, and grand feasts.</p>
+                            </div>
+                        </div>
+
+                        <!-- Event 11: Ratha Yatra -->
+                        <div class="event-card glass-panel animate-item">
+                            <div class="event-header-bar">
+                                <span class="event-icon-emoji">🛕</span>
+                                <div class="event-meta-info">
+                                    <span class="event-badge blue-bg">Chariot Festival</span>
+                                    <span class="event-date">Jul-Aug 2026</span>
+                                </div>
+                            </div>
+                            <div class="event-content-body">
+                                <h3 class="event-title">Ratha Yatra</h3>
+                                <p class="event-description">The monumental chariot procession of Lord Jagannath in Puri, drawing millions of global devotees.</p>
+                            </div>
+                        </div>
+
+                        <!-- Event 12: Ganesh Chaturthi -->
+                        <div class="event-card glass-panel animate-item">
+                            <div class="event-header-bar">
+                                <span class="event-icon-emoji">🐘</span>
+                                <div class="event-meta-info">
+                                    <span class="event-badge orange-bg">Street Procession</span>
+                                    <span class="event-date">Sep 2026</span>
+                                </div>
+                            </div>
+                            <div class="event-content-body">
+                                <h3 class="event-title">Ganesh Chaturthi</h3>
+                                <p class="event-description">A spectacular public festival in Mumbai with giant Ganesha idols, music, drums, and colorful processions.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- About Us View -->
+                <div id="about-view" class="portal-view">
+                    <div class="view-header text-center animate-item">
+                        <h2 class="section-heading">About India e-Visa Portal</h2>
+                        <p class="section-subheading">Official digitized travel authorization platform for global citizens.</p>
+                    </div>
+                    <div class="about-card glass-panel animate-item">
+                        <div class="about-content">
+                            <h3>Simplified Travel Authorization</h3>
+                            <p>The India e-Visa Portal is the official digital gateway managed by the Bureau of Immigration under the Ministry of Home Affairs, Government of India. This system allows foreign nationals to submit their e-Visa applications entirely online, reducing paperwork and processing times.</p>
+                            <p>Our platform handles travel authorizations for tourism, short business excursions, medical treatment, and academic conferences. With our secure digital structure, we ensure smooth and transparent visa handling directly to your email inbox.</p>
+                            
+                            <div class="about-stats">
+                                <div class="stat-box glass-panel">
+                                    <span class="stat-number">160+</span>
+                                    <span class="stat-label">Eligible Nationalities</span>
+                                </div>
+                                <div class="stat-box glass-panel">
+                                    <span class="stat-number">72 Hrs</span>
+                                    <span class="stat-label">Standard Review Time</span>
+                                </div>
+                                <div class="stat-box glass-panel">
+                                    <span class="stat-number">100%</span>
+                                    <span class="stat-label">Paperless Submission</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ View -->
+                <div id="faq-view" class="portal-view">
+                    <div class="view-header text-center animate-item">
+                        <h2 class="section-heading">Frequently Asked Questions</h2>
+                        <p class="section-subheading">Find instant resolutions to standard queries regarding application review and guidelines.</p>
+                    </div>
+                    <div class="faq-accordion">
+                        <div class="faq-item glass-panel animate-item">
+                            <div class="faq-question">
+                                <span>Who is eligible to apply for an India e-Visa?</span>
+                                <span class="faq-icon">➕</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Foreign nationals of over 160 countries who hold a passport with at least six months validity from the date of arrival in India. The purpose of visit must be tourism, short business, medical treatment, or brief conferences.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item glass-panel animate-item">
+                            <div class="faq-question">
+                                <span>What is the standard processing time for an e-Visa?</span>
+                                <span class="faq-icon">➕</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Standard processing time is 72 hours (3 business days) after application fee payment. We recommend applying at least 4 business days before your flight.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item glass-panel animate-item">
+                            <div class="faq-question">
+                                <span>What documents do I need to upload?</span>
+                                <span class="faq-icon">➕</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>You will need a clean PDF scan of your passport's bio-data page (including photo and details) and a high-resolution, square digital photograph with a plain white background (JPEG format).</p>
+                            </div>
+                        </div>
+                        <div class="faq-item glass-panel animate-item">
+                            <div class="faq-question">
+                                <span>Is the e-Tourist Visa multi-entry?</span>
+                                <span class="faq-icon">➕</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Yes, the 1-year and 5-year e-Tourist and e-Business visas allow multiple entries. The 30-day e-Tourist Visa allows double-entry.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Footer Section -->
+            <footer class="footer-bar glass-panel animate-item">
+                <div class="footer-content">
+                    <div class="footer-info">
+                        <span class="footer-title">Contact Support</span>
+                        <div class="footer-contacts">
+                            <span class="contact-item">📧 indvisa-support@gov.in</span>
+                            <span class="contact-item">📞 +91-11-24300606</span>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-logos">
+                        <img src="swachh_bharat.png" alt="Swachh Bharat" class="footer-logo swachh-logo">
+                        <img src="study_in_india.png" alt="Study in India" class="footer-logo study-logo">
+                    </div>
+
+                    <div class="footer-copyright">
+                        <p>© 2026 Ministry of Home Affairs, Government of India.</p>
+                        <p class="managed-by">Managed by Bureau of Immigration</p>
+                    </div>
+                    
+                    <!-- Saarthi AI Footer Action Button -->
+                    <div class="saarthi-badge glass-panel" id="saarthi-trigger">
+                        <div class="saarthi-text">
+                            <span class="saarthi-name">Saarthi AI</span>
+                            <span class="saarthi-action">Query Help</span>
+                        </div>
+                        <div class="saarthi-icon-wrapper">
+                            <span class="saarthi-icon">🎙️</span>
+                            <div class="pulse-ring"></div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+            <!-- MODAL: e-Visa Application Form (Step Stepper) -->
+            <div id="apply-modal" class="modal-overlay hidden">
+                <div class="modal-card glass-panel">
+                    <div class="modal-header">
+                        <h2 class="modal-title">e-Visa Application</h2>
+                        <button id="modal-close" class="modal-close-btn">×</button>
+                    </div>
+                    
+                    <!-- Stepper Progress Tracker -->
+                    <div class="stepper-tracker">
+                        <div class="step-node active" data-step="1">
+                            <span class="step-num">1</span>
+                            <span class="step-label">Travel Details</span>
+                        </div>
+                        <div class="step-connector"></div>
+                        <div class="step-node" data-step="2">
+                            <span class="step-num">2</span>
+                            <span class="step-label">Personal Info</span>
+                        </div>
+                        <div class="step-connector"></div>
+                        <div class="step-node" data-step="3">
+                            <span class="step-num">3</span>
+                            <span class="step-label">Documents</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 1 Content -->
+                    <div class="step-content active" data-step="1">
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label class="field-label">Visa Type</label>
+                                <select class="field-input glass-panel-input">
+                                    <option>e-Tourist Visa (30 Days)</option>
+                                    <option>e-Business Visa</option>
+                                    <option>e-Medical Visa</option>
+                                </select>
+                            </div>
+                            <div class="form-field">
+                                <label class="field-label">Port of Arrival</label>
+                                <select class="field-input glass-panel-input">
+                                    <option>Delhi (DEL) - IGI Airport</option>
+                                    <option>Mumbai (BOM) - Chhatrapati Shivaji Airport</option>
+                                    <option>Bengaluru (BLR) - Kempegowda Airport</option>
+                                    <option>Chennai (MAA) - Chennai Airport</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label class="field-label">Expected Date of Arrival</label>
+                                <input type="date" class="field-input glass-panel-input" value="2026-08-01">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 Content -->
+                    <div class="step-content" data-step="2">
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label class="field-label">Given Name (as in Passport)</label>
+                                <input type="text" class="field-input glass-panel-input" placeholder="John">
+                            </div>
+                            <div class="form-field">
+                                <label class="field-label">Surname</label>
+                                <input type="text" class="field-input glass-panel-input" placeholder="Doe">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label class="field-label">Email Address</label>
+                                <input type="email" class="field-input glass-panel-input" placeholder="john.doe@example.com">
+                            </div>
+                            <div class="form-field">
+                                <label class="field-label">Phone Number</label>
+                                <input type="tel" class="field-input glass-panel-input" placeholder="+1 (555) 000-0000">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 Content -->
+                    <div class="step-content" data-step="3">
+                        <p class="upload-note">Please upload clear scans of your passport information page and a recent photograph.</p>
+                        <div class="upload-box glass-panel">
+                            <span class="upload-icon">📁</span>
+                            <span class="upload-text">Upload Passport Page (PDF/JPG)</span>
+                            <button class="btn btn-upload glass-panel">Choose File</button>
+                        </div>
+                        <div class="upload-box glass-panel">
+                            <span class="upload-icon">📷</span>
+                            <span class="upload-text">Upload Recent Photograph (JPG)</span>
+                            <button class="btn btn-upload glass-panel">Choose File</button>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button id="step-prev" class="btn btn-secondary glass-panel hidden">Back</button>
+                        <button id="step-next" class="btn btn-primary glowing-primary">Next</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CHATBOX: Saarthi AI Popup Chat Widget -->
+            <div id="saarthi-chatbox" class="chatbox-overlay hidden">
+                <div class="chatbox-card glass-panel">
+                    <div class="chatbox-header">
+                        <div class="chatbox-info">
+                            <span class="chatbox-avatar">🎙️</span>
+                            <div>
+                                <h4 class="chatbox-name">Saarthi AI Helper</h4>
+                                <span class="chatbox-status">Online • Ask visa queries</span>
+                            </div>
+                        </div>
+                        <button id="chatbox-close" class="chatbox-close-btn">×</button>
+                    </div>
+                    
+                    <div class="chatbox-body" id="chatbox-messages">
+                        <div class="chat-msg bot">
+                            <div class="chat-bubble">
+                                Namaste! I am Saarthi, your digital guide. How can I help you with your e-Visa application today?
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="chatbox-suggested">
+                        <button class="suggest-btn glass-panel" data-question="What are the e-Visa requirements?">Requirements</button>
+                        <button class="suggest-btn glass-panel" data-question="What is the processing time?">Processing Time</button>
+                        <button class="suggest-btn glass-panel" data-question="How can I track my status?">Track Status</button>
+                    </div>
+
+                    <div class="chatbox-footer">
+                        <input type="text" id="chat-input" placeholder="Type your query..." class="chat-input glass-panel-input">
+                        <button id="chat-send" class="chat-send-btn">➔</button>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- App Scripts -->
+    <script src="app.js"></script>
+</body>
+</html>
